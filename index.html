@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Нейробот ТЕССА AI — превью</title>
 <style>html { font-size: 10px; } body { margin: 0; }</style>
-<link rel="stylesheet" href="page.css?v=1794912771">
+<link rel="stylesheet" href="preview.css?v=1794914136">
 </head>
 <body>
 <!--
@@ -13,7 +13,9 @@
   Текст — по Google Doc 17YE_QEClYYxYqXPgtH-I6ZBmIBUkoX9PtRcCa4hP0PA («ТЗ на сайт продажи БОТ-ИИ»).
   Оформление — как на ../sale, ../ai-songs и ../ai-sound, тот же набор компонентов.
 
-  Вставляется в блок «HTML» страницы ГетКурса целиком.
+  Вставляется в два блока «HTML» страницы ГетКурса: build.py режет файл по метке
+  «ГРАНИЦА БЛОКОВ» на gc/page-top.html (экраны 1–6) и gc/page-bottom.html (финал),
+  между ними стоит блок формы заказа.
   Все классы — tsss-блок__элемент--модификатор, всё внутри .tsss-page.
 
   Пути img/... и video/..., код формы вопроса b-ASK и id блока формы заказа ltBlockTOKENS —
@@ -239,53 +241,31 @@
   </section>
 
   <!-- ==================== ЭКРАН 6. ПАКЕТЫ ТОКЕНОВ (блок с продажей) ====================
-       Одна форма заказа ГетКурса с выбором пакета. Сам блок формы стоит на странице
-       отдельно — page.js переносит его в .tsss-packs__panel по id из data-tsss-form
-       (заготовка ltBlockTOKENS, настоящий id подставляет build.py). -->
-  <section class="tsss-section tsss-section--violet tsss-packs" id="tsss-packs">
-    <div class="tsss-container tsss-packs__layout">
-      <div class="tsss-packs__intro">
-        <h2 class="tsss-section__title">Пополните баланс&nbsp;— <span class="tsss-grad-text">и&nbsp;начните создавать</span></h2>
-        <p class="tsss-section__lead">Токены&nbsp;— единицы внутреннего баланса бота. Они расходуются на&nbsp;запросы к&nbsp;нейросетям. Количество зависит от&nbsp;инструмента и&nbsp;параметров генерации.</p>
-        <ul class="tsss-packs__facts">
-          <li class="tsss-packs__fact"><svg class="tsss-packs__fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Пакеты от&nbsp;100 до&nbsp;1&nbsp;000 токенов</span></li>
-          <li class="tsss-packs__fact"><svg class="tsss-packs__fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Чем больше пакет, тем дешевле токен: от&nbsp;3 до&nbsp;1,1&nbsp;₽</span></li>
-          <li class="tsss-packs__fact"><svg class="tsss-packs__fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Токены не&nbsp;сгорают&nbsp;— нет сроков действия</span></li>
-          <li class="tsss-packs__fact"><svg class="tsss-packs__fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Доступ открывается сразу после оплаты</span></li>
-        </ul>
-      </div>
-
-      <div class="tsss-packs__panel">
-        <p class="tsss-packs__panel-title">Выберите пакет</p>
-        <div class="tsss-packs__form" data-tsss-form="ltBlockFORMS"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== ЭКРАН 7. ФИНАЛ ==================== -->
-  <section class="tsss-section tsss-section--dark tsss-final">
-    <img class="tsss-final__bg" src="img/final-bg.webp" alt="" width="1536" height="1024" loading="lazy">
-
-    <div class="tsss-container tsss-final__inner">
-      <p class="tsss-eyebrow">Нейробот ТЕССА&nbsp;AI</p>
-      <h2 class="tsss-section__title tsss-final__title">Ваша следующая идея может стать <span class="tsss-grad-text">изображением, текстом или&nbsp;видео</span></h2>
-      <p class="tsss-section__lead tsss-final__lead">Выберите, что хотите создать первым. Купите пакет токенов и&nbsp;получите доступ к&nbsp;боту сразу после оплаты.</p>
-
-      <div class="tsss-final__actions">
-        <a class="tsss-btn tsss-btn--glow" href="#tsss-packs">Начать&nbsp;— от&nbsp;300&nbsp;₽</a>
-        <a class="tsss-btn tsss-btn--glass" href="javascript:void(0);" onclick="ltShowModalBlock('b-ASK')">Есть вопросы? Задайте поддержке</a>
-      </div>
+       Здесь только заголовок и пункты. Сама форма заказа — отдельный блок ГетКурса,
+       он стоит сразу после этого HTML-блока и продолжает фон экрана (стили — #ltBlockTOKENS
+       в page.css). data-tsss-form — id блока формы для page.js: он дописывает цену за токен. -->
+  <section class="tsss-section tsss-section--violet tsss-packs" id="tsss-packs" data-tsss-form="ltBlockTOKENS">
+    <div class="tsss-container">
+      <h2 class="tsss-section__title">Пополните баланс&nbsp;— <span class="tsss-grad-text">и&nbsp;начните создавать</span></h2>
+      <p class="tsss-section__lead">Токены&nbsp;— единицы внутреннего баланса бота. Они расходуются на&nbsp;запросы к&nbsp;нейросетям. Количество зависит от&nbsp;инструмента и&nbsp;параметров генерации.</p>
+      <ul class="tsss-packs__facts">
+        <li class="tsss-packs__fact"><svg class="tsss-packs__fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Пакеты от&nbsp;100 до&nbsp;1&nbsp;000 токенов</span></li>
+        <li class="tsss-packs__fact"><svg class="tsss-packs__fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Чем больше пакет, тем дешевле токен: от&nbsp;3 до&nbsp;1,1&nbsp;₽</span></li>
+        <li class="tsss-packs__fact"><svg class="tsss-packs__fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Токены не&nbsp;сгорают&nbsp;— нет сроков действия</span></li>
+        <li class="tsss-packs__fact"><svg class="tsss-packs__fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Доступ открывается сразу после оплаты</span></li>
+      </ul>
     </div>
   </section>
 
 </div>
+
 <!--
   Макет формы заказа ГетКурса — только для превью (preview.html, index.html).
   Разметка упрощена с настоящей формы b-0c276 (страница id=4836698, form02, пять
-  предложений «БОТ AI | Покупка N токенов», галочки оферты и персональных данных). id — заготовка ltBlockFORMS, чтобы
-  к макету применились стили форм из page.css. В gc/ не попадает.
+  предложений «БОТ AI | Покупка N токенов», галочки оферты и персональных данных). id — заготовка ltBlockTOKENS: build.py кладёт макет
+  между частями страницы, а в preview.css стили форм пишет на этот id. В gc/ не попадает.
 -->
-<div id="ltBlockFORMS" class="lt-block lt-view form02 lt-form lt-form-normal">
+<div id="ltBlockTOKENS" class="lt-block lt-view form02 lt-form lt-form-normal">
   <div class="lt-block-wrapper">
   <div class="container">
   <div class="row">
@@ -365,6 +345,30 @@
   </div>
 </div>
 
-<script src="page.js?v=1794912771"></script>
+<!-- ==================== ГРАНИЦА БЛОКОВ ====================
+     build.py режет страницу здесь на два HTML-блока: выше — экраны 1–6, ниже — финал.
+     Между ними на ГетКурсе стоит блок формы заказа. -->
+
+<div class="tsss-page tsss-page--ai-bot">
+
+  <!-- ==================== ЭКРАН 7. ФИНАЛ ==================== -->
+  <section class="tsss-section tsss-section--dark tsss-final">
+    <img class="tsss-final__bg" src="img/final-bg.webp" alt="" width="1536" height="1024" loading="lazy">
+
+    <div class="tsss-container tsss-final__inner">
+      <p class="tsss-eyebrow">Нейробот ТЕССА&nbsp;AI</p>
+      <h2 class="tsss-section__title tsss-final__title">Ваша следующая идея может стать <span class="tsss-grad-text">изображением, текстом или&nbsp;видео</span></h2>
+      <p class="tsss-section__lead tsss-final__lead">Выберите, что хотите создать первым. Купите пакет токенов и&nbsp;получите доступ к&nbsp;боту сразу после оплаты.</p>
+
+      <div class="tsss-final__actions">
+        <a class="tsss-btn tsss-btn--glow" href="#tsss-packs">Начать&nbsp;— от&nbsp;300&nbsp;₽</a>
+        <a class="tsss-btn tsss-btn--glass" href="javascript:void(0);" onclick="ltShowModalBlock('b-ASK')">Есть вопросы? Задайте поддержке</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="page.js?v=1794914136"></script>
 </body>
 </html>

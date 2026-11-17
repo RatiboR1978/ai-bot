@@ -2,18 +2,23 @@
 
     python build.py
 
-1. preview.html и index.html — просмотр: page.html + page.css + page.js
+Страница на ГетКурсе — два блока «HTML» с формой заказа между ними:
+экраны 1–6 → блок формы заказа → финал. page.html — один файл, место
+разреза отмечено комментарием «ГРАНИЦА БЛОКОВ».
+
+1. preview.html и index.html — просмотр: обе части страницы и между ними
+   макет формы заказа из form-mock.html, как блок формы на ГетКурсе
    (index.html — для GitHub Pages: без него там открывается README),
    с `html { font-size: 10px }`, как в глобальной теме ГетКурса,
    чтобы сразу ловить размеры, которые от неё зависят.
-   Вместо формы заказа ГетКурса — макет из form-mock.html: page.js
-   переносит его в экран пакетов так же, как настоящую форму.
-2. gc/page.html — то, что вставляется в блок «HTML» на ГетКурсе:
-   пути img/*.webp и video/*.mp4 заменены на адреса из img-urls.txt,
-   код формы вопроса b-ASK и id блока формы заказа ltBlockTOKENS —
-   на настоящие из gc-ids.txt.
-3. gc/page.css — то, что вставляется в блок «CSS»: заготовка
-   #ltBlockFORMS заменена на список id всех блоков форм.
+   Стили превью — preview.css: page.css, где заготовка #ltBlockFORMS
+   заменена на id макета (ltBlockTOKENS).
+2. gc/page-top.html и gc/page-bottom.html — то, что вставляется в два блока
+   «HTML» на ГетКурсе: пути img/*.webp и video/*.mp4 заменены на адреса
+   из img-urls.txt, код формы вопроса b-ASK и id блока формы заказа
+   ltBlockTOKENS — на настоящие из gc-ids.txt.
+3. gc/page.css — то, что вставляется в блок «CSS»: заготовка #ltBlockFORMS
+   заменена на список id всех блоков форм, #ltBlockTOKENS — на id формы заказа.
 
 Если адреса картинки, видео или кода формы нет, сборка это перечислит и оставит
 заготовку — на сайте такая картинка не покажется, а кнопка не откроет форму.
@@ -32,6 +37,8 @@ HERE = pathlib.Path(__file__).resolve().parent
 # Роли форм на странице: заказ пакета токенов (одна форма с выбором)
 # и вопрос в поддержку
 FORMS = ('TOKENS', 'ASK')
+# Метка разреза в page.html: выше — блок «HTML» до формы, ниже — после
+CUT = '<!-- ==================== ГРАНИЦА БЛОКОВ'
 
 
 def read(name):
@@ -54,14 +61,20 @@ def read_pairs(name):
     return pairs
 
 
-def build_preview(html):
-    # Макет формы встаёт после страницы, как блок формы на ГетКурсе,
-    # и page.js переносит его в экран пакетов по id
-    html = html.replace('data-tsss-form="ltBlockTOKENS"', 'data-tsss-form="ltBlockFORMS"')
-    html += read('form-mock.html')
-    # Метка версии в адресе — иначе браузер берёт page.css/page.js из кэша
+def split(html):
+    """Две части страницы: до формы заказа и после (комментарий-метка уходит во вторую)."""
+    at = html.index(CUT)
+    return html[:at].rstrip() + '\n', html[at:]
+
+
+def build_preview(html, css):
+    top, bottom = split(html)
+    # Макет формы стоит между частями, как блок формы на ГетКурсе
+    body = top + '\n' + read('form-mock.html') + '\n' + bottom
+    (HERE / 'preview.css').write_text(css.replace('#ltBlockFORMS', '#ltBlockTOKENS'), encoding='utf-8')
+    # Метка версии в адресе — иначе браузер берёт css/js из кэша
     # и правки в превью не видны
-    v = int(max((HERE / n).stat().st_mtime for n in ('page.css', 'page.js')))
+    v = int(max((HERE / n).stat().st_mtime for n in ('page.css', 'page.js', 'form-mock.html')))
     doc = f"""<!doctype html>
 <html lang="ru">
 <head>
@@ -69,10 +82,10 @@ def build_preview(html):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Нейробот ТЕССА AI — превью</title>
 <style>html {{ font-size: 10px; }} body {{ margin: 0; }}</style>
-<link rel="stylesheet" href="page.css?v={v}">
+<link rel="stylesheet" href="preview.css?v={v}">
 </head>
 <body>
-{html}
+{body}
 <script src="page.js?v={v}"></script>
 </body>
 </html>
@@ -98,6 +111,7 @@ def build_gc(html, css, urls, forms):
             code, block = forms[role]
             html = html.replace(f"'b-{role}'", f"'{code}'")
             html = html.replace(f'ltBlock{role}', block)
+            css = css.replace(f'#ltBlock{role}', f'#{block}')
             blocks.append(f'#{block}')
         else:
             missing.append(f'форма {role} (gc-ids.txt)')
@@ -105,19 +119,25 @@ def build_gc(html, css, urls, forms):
     if blocks:
         css = css.replace('#ltBlockFORMS', ', '.join(blocks))
 
-    (HERE / 'gc').mkdir(exist_ok=True)
+    top, bottom = split(html)
+    out = HERE / 'gc'
+    out.mkdir(exist_ok=True)
+    # Старый файл одним блоком — больше не вставляется, убираем, чтобы не перепутать
+    (out / 'page.html').unlink(missing_ok=True)
     # newline='\n' — редактор ГетКурса хранит код с LF, так проще сверять
-    (HERE / 'gc' / 'page.html').write_text(html, encoding='utf-8', newline='\n')
-    (HERE / 'gc' / 'page.css').write_text(css, encoding='utf-8', newline='\n')
+    (out / 'page-top.html').write_text(top, encoding='utf-8', newline='\n')
+    (out / 'page-bottom.html').write_text(bottom, encoding='utf-8', newline='\n')
+    (out / 'page.css').write_text(css, encoding='utf-8', newline='\n')
     return sorted(set(missing))
 
 
 def main():
     html = read('page.html')
-    build_preview(html)
-    missing = build_gc(html, read('page.css'), read_pairs('img-urls.txt'), read_pairs('gc-ids.txt'))
-    print('preview.html, index.html — готово')
-    print('gc/page.html, gc/page.css — готово')
+    css = read('page.css')
+    build_preview(html, css)
+    missing = build_gc(html, css, read_pairs('img-urls.txt'), read_pairs('gc-ids.txt'))
+    print('preview.html, index.html, preview.css — готово')
+    print('gc/page-top.html, gc/page-bottom.html, gc/page.css — готово')
     if missing:
         print(f'Не хватает {len(missing)}:')
         for name in missing:

@@ -84,7 +84,9 @@
 
     /* ---------- Плавная прокрутка к якорям внутри страницы ---------- */
 
-    page.querySelectorAll('a[href^="#tsss-"]').forEach(function (link) {
+    // Страница — два HTML-блока (до формы заказа и после), у каждого свой
+    // .tsss-page--ai-bot: ссылки к якорям есть в обоих
+    document.querySelectorAll('.tsss-page--ai-bot a[href^="#tsss-"]').forEach(function (link) {
       link.addEventListener('click', function (event) {
         var target = document.getElementById(link.getAttribute('href').slice(1));
         if (!target) return;
@@ -93,17 +95,14 @@
       });
     });
 
-    /* ---------- Форма заказа — в экран пакетов ----------
-       Блок формы ГетКурса стоит на странице отдельным блоком (после HTML).
-       Переносим его в карточку .tsss-packs__form: id блока — в data-tsss-form.
-       Если блока нет (id сменился), форма просто останется на своём месте. */
+    /* ---------- Форма заказа: цена за токен у пакетов ----------
+       Блок формы ГетКурса стоит сразу после экрана пакетов, его id —
+       в data-tsss-form у секции. Не нашёлся (id сменился) — форма
+       просто останется с названиями предложений как есть. */
 
-    var mount = page.querySelector('[data-tsss-form]');
-    var formBlock = mount && document.getElementById(mount.getAttribute('data-tsss-form'));
-    if (formBlock) {
-      if (!mount.contains(formBlock)) mount.appendChild(formBlock);
-      decorateOffers(formBlock);
-    }
+    var packs = page.querySelector('[data-tsss-form]');
+    var formBlock = packs && document.getElementById(packs.getAttribute('data-tsss-form'));
+    if (formBlock) decorateOffers(formBlock);
 
     /* ---------- Ленты примеров: стрелки ----------
        Листается сама лента (overflow-x + scroll-snap), пальцем и колесом

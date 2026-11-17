@@ -1141,36 +1141,29 @@
   color: var(--tsss-tone-muted);
 }
 
-/* ---------- Экран 6: пакеты токенов ---------- */
+/* ---------- Экран 6: пакеты токенов ----------
+   Секция — только заголовок и пункты. Форма заказа — следующий блок
+   ГетКурса (#ltBlock2262937572, стили ниже, в разделе форм): он продолжает
+   этот фон, поэтому у секции нет нижнего затемнения и нижний отступ мал. */
 
 .tsss-page .tsss-packs {
   scroll-margin-top: 0;
+  padding-bottom: 40px;
   background:
-    linear-gradient(180deg, #0B0426 0%, rgba(11, 4, 38, 0) 18%, rgba(11, 4, 38, 0) 82%, #0B0426 100%),
+    linear-gradient(180deg, #0B0426 0%, rgba(11, 4, 38, 0) 30%),
     linear-gradient(90deg, rgba(184, 140, 255, 0) 0%, rgba(184, 140, 255, 0.5) 50%, rgba(184, 140, 255, 0) 100%),
     var(--tsss-violet);
 }
 
-/* Слева — заголовок и что важно знать, справа — форма заказа */
-.tsss-page .tsss-packs__layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
-  align-items: center;
-  gap: 40px 72px;
-}
-
-.tsss-page .tsss-packs__intro .tsss-section__title,
-.tsss-page .tsss-packs__intro .tsss-section__lead {
-  text-align: left;
-}
-
-.tsss-page .tsss-packs__intro .tsss-section__lead {
-  margin: 0 0 32px;
+.tsss-page .tsss-packs .tsss-section__lead {
+  margin-bottom: 36px;
 }
 
 .tsss-page .tsss-packs__facts {
   display: grid;
-  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  justify-content: center;
+  gap: 14px 40px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1194,26 +1187,6 @@
   border-radius: 50%;
   background: rgba(127, 232, 255, 0.14);
   color: var(--tsss-ai-glow);
-}
-
-/* Карточка формы: градиентная рамка, как у карточки «пока не кончатся» */
-.tsss-page .tsss-packs__panel {
-  padding: 32px 32px 12px;
-  border: 1px solid transparent;
-  border-radius: var(--tsss-radius-lg);
-  background:
-    linear-gradient(#1B1543, #1B1543) padding-box,
-    linear-gradient(135deg, rgba(127, 232, 255, 0.7), rgba(184, 140, 255, 0.35) 50%, rgba(246, 199, 232, 0.7)) border-box;
-  box-shadow: 0 24px 60px rgba(11, 4, 38, 0.45);
-}
-
-.tsss-page .tsss-packs__panel-title {
-  margin: 0 0 8px;
-  font-size: clamp(22px, 18px + 0.6vw, 28px);
-  font-weight: 800;
-  line-height: 1.2;
-  text-align: center;
-  color: var(--tsss-cloud-white);
 }
 
 /* ---------- Экран 7: финал ---------- */
@@ -1382,34 +1355,48 @@
   color: #FFFFFF;
 }
 
-/* Форма заказа внутри экрана пакетов: карточку рисует .tsss-packs__panel,
-   у блока ГетКурса убираем свой фон, рамку, отступы и бутстраповскую сетку
-   (.container шириной 1170px, колонка col-md-8 со сдвигом) */
-.tsss-packs__form :is(#ltBlock2262937572, #ltBlock2262941216) {
-  padding: 0 !important;
+/* Форма заказа — обычный (не всплывающий) блок сразу после экрана пакетов.
+   Продолжает его фон и заканчивается затемнением, как конец секции.
+   #ltBlock2262937572 — заготовка, build.py подставляет id блока из gc-ids.txt.
+   Двойной класс .lt-block — чтобы перебить общие правила форм выше. */
+/* box-sizing — у ГетКурса он border-box из бутстрапа, но не будем на это
+   опираться: иначе width: 100% + отступы карточки вылезают за экран */
+#ltBlock2262937572.lt-block,
+#ltBlock2262937572.lt-block * {
+  box-sizing: border-box;
+}
+
+#ltBlock2262937572.lt-block {
+  padding: 0 var(--tsss-gutter) var(--tsss-section-pad) !important;
+  background:
+    linear-gradient(180deg, rgba(11, 4, 38, 0) 55%, #0B0426 100%),
+    linear-gradient(90deg, rgba(184, 140, 255, 0) 0%, rgba(184, 140, 255, 0.5) 50%, rgba(184, 140, 255, 0) 100%),
+    var(--tsss-violet) !important;
+}
+
+#ltBlock2262937572.lt-block .lt-block-wrapper {
   background: transparent !important;
 }
 
-.tsss-packs__form :is(#ltBlock2262937572, #ltBlock2262941216) .container {
+/* Бутстрап ГетКурса: .container 1170px, колонка col-md-8 со сдвигом */
+#ltBlock2262937572.lt-block .container {
   width: auto;
-  max-width: none;
+  max-width: 600px;
+  margin: 0 auto;
   padding: 0;
 }
 
-.tsss-packs__form :is(#ltBlock2262937572, #ltBlock2262941216) .row {
+#ltBlock2262937572.lt-block .row {
   margin: 0;
 }
 
-.tsss-packs__form :is(#ltBlock2262937572, #ltBlock2262941216) .block-box {
-  padding: 0 !important;
-  background: transparent !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none;
-}
-
-.tsss-packs__form :is(#ltBlock2262937572, #ltBlock2262941216) .form-content {
-  padding: 15px 0 !important;
+/* Карточка — с градиентной рамкой, как карточка «пока не кончатся» */
+#ltBlock2262937572.lt-block .block-box {
+  padding: 24px 28px 4px !important;
+  border: 1px solid transparent !important;
+  background:
+    linear-gradient(#1B1543, #1B1543) padding-box,
+    linear-gradient(135deg, rgba(127, 232, 255, 0.7), rgba(184, 140, 255, 0.35) 50%, rgba(246, 199, 232, 0.7)) border-box !important;
 }
 
 /* Поля — «таблетки» */
@@ -1553,13 +1540,17 @@
 
   /* Пакеты токенов короткие — цена остаётся справа, в одну строку
      с названием, иначе пять пакетов вытягивают форму на два экрана */
-  .tsss-packs__form :is(#ltBlock2262937572, #ltBlock2262941216) .form-position {
+  #ltBlock2262937572.lt-block .form-position {
     display: flex;
     gap: 12px;
   }
 
-  .tsss-packs__form :is(#ltBlock2262937572, #ltBlock2262941216) .form-position-price {
+  #ltBlock2262937572.lt-block .form-position-price {
     margin-left: auto;
+  }
+
+  #ltBlock2262937572.lt-block .block-box {
+    padding: 18px 16px 2px !important;
   }
 }
 
@@ -1568,11 +1559,6 @@
    ============================================================ */
 
 @media (max-width: 1119px) {
-  .tsss-page .tsss-packs__layout {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
-    gap: 40px;
-  }
-
   /* Текст ложится на телефон с картинки — затемняем всю картинку */
   .tsss-page .tsss-hero__stage::after {
     background: linear-gradient(180deg, rgba(11, 4, 38, 0.55) 0%, rgba(11, 4, 38, 0.80) 45%, #0B0426 85%);
@@ -1598,29 +1584,6 @@
 }
 
 @media (max-width: 959px) {
-  /* Пакеты: текст над формой, по центру */
-  .tsss-page .tsss-packs__layout {
-    grid-template-columns: minmax(0, 1fr);
-    justify-items: center;
-  }
-
-  .tsss-page .tsss-packs__intro .tsss-section__title,
-  .tsss-page .tsss-packs__intro .tsss-section__lead {
-    text-align: center;
-  }
-
-  .tsss-page .tsss-packs__facts {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px 28px;
-    max-width: 720px;
-    margin-inline: auto;
-  }
-
-  .tsss-page .tsss-packs__panel {
-    width: 100%;
-    max-width: 600px;
-  }
-
   .tsss-page .tsss-create__list {
     grid-template-columns: 1fr;
     max-width: 640px;
@@ -1715,14 +1678,11 @@
 @media (max-width: 559px) {
   .tsss-page .tsss-packs__facts {
     grid-template-columns: minmax(0, 1fr);
+    justify-content: stretch;
   }
 
   .tsss-page .tsss-packs__fact {
     font-size: 16px;
-  }
-
-  .tsss-page .tsss-packs__panel {
-    padding: 24px 18px 4px;
   }
 
   .tsss-page .tsss-create__item {
