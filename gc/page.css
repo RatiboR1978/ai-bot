@@ -1231,7 +1231,7 @@
 /* ============================================================
    ФОРМЫ — родные блоки ГетКурса (form02): форма заказа с выбором
    пакета (стоит в экране пакетов) и всплывающая форма вопроса.
-   #ltBlock2262937572 — заготовка: build.py заменяет её на список id всех
+   #ltBlock2262937572, #ltBlock2262941216 — заготовка: build.py заменяет её на список id всех
    блоков форм из gc-ids.txt.
    Оформлены как форма на tsss-ai.ru/token_purchase.
 
@@ -1240,21 +1240,21 @@
    его видно в коде страницы, id="ltBlock…" у блока с нужным data-code.
    ============================================================ */
 
-:is(#ltBlock2262937572) {
+:is(#ltBlock2262937572, #ltBlock2262941216) {
   font-family: var(--tsss-font-body);
   color: #FFFFFF;
 }
 
 /* Всплывающее окно ГетКурса вокруг формы: белая подложка и ширина 500px
    по умолчанию. :has() — чтобы не задеть другие окна на странице. */
-.modal.gc-modal:has(#ltBlock2262937572) {
+.modal.gc-modal:has(#ltBlock2262937572, #ltBlock2262941216) {
   background: rgba(11, 4, 38, 0.75);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
 }
 
 /* !important — ГетКурс пишет окну width: 500px прямо в style */
-.modal-dialog:has(#ltBlock2262937572) {
+.modal-dialog:has(#ltBlock2262937572, #ltBlock2262941216) {
   width: min(600px, calc(100vw - 32px)) !important;
   /* у ГетКурса до 800px min-width: 480px, до 600px — 100% */
   min-width: 0;
@@ -1262,17 +1262,17 @@
   margin: 40px auto;
 }
 
-.modal-content:has(#ltBlock2262937572) {
+.modal-content:has(#ltBlock2262937572, #ltBlock2262941216) {
   background: transparent;
   border: 0;
   box-shadow: none;
 }
 
-:is(#ltBlock2262937572) .lt-block-wrapper {
+:is(#ltBlock2262937572, #ltBlock2262941216) .lt-block-wrapper {
   padding: 0 !important;
 }
 
-:is(#ltBlock2262937572) .block-box {
+:is(#ltBlock2262937572, #ltBlock2262941216) .block-box {
   float: none;
   width: 100%;
   margin: 0 auto !important;
@@ -1283,12 +1283,12 @@
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
 }
 
-:is(#ltBlock2262937572) .form-content {
+:is(#ltBlock2262937572, #ltBlock2262941216) .form-content {
   padding: 15px !important;
 }
 
 /* Заголовок формы («Консультация менеджера») */
-:is(#ltBlock2262937572) .f-header {
+:is(#ltBlock2262937572, #ltBlock2262941216) .f-header {
   margin: 0 0 20px !important;
   font-family: var(--tsss-font-body) !important;
   font-size: clamp(22px, 18px + 0.6vw, 28px) !important;
@@ -1299,7 +1299,7 @@
 }
 
 /* Предложение: строка-карточка с ценой справа */
-:is(#ltBlock2262937572) .form-position {
+:is(#ltBlock2262937572, #ltBlock2262941216) .form-position {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1313,26 +1313,26 @@
   cursor: pointer;
 }
 
-:is(#ltBlock2262937572) .form-position.selected,
-:is(#ltBlock2262937572) .form-position:has(.form-position-input:checked) {
+:is(#ltBlock2262937572, #ltBlock2262941216) .form-position.selected,
+:is(#ltBlock2262937572, #ltBlock2262941216) .form-position:has(.form-position-input:checked) {
   border-color: #9B6BE4 !important;
   background: rgba(155, 107, 228, 0.18) !important;
 }
 
-:is(#ltBlock2262937572) .form-position-checker,
-:is(#ltBlock2262937572) .form-position-title,
-:is(#ltBlock2262937572) .form-position-price {
+:is(#ltBlock2262937572, #ltBlock2262941216) .form-position-checker,
+:is(#ltBlock2262937572, #ltBlock2262941216) .form-position-title,
+:is(#ltBlock2262937572, #ltBlock2262941216) .form-position-price {
   float: none !important;
 }
 
-:is(#ltBlock2262937572) .form-position-title {
+:is(#ltBlock2262937572, #ltBlock2262941216) .form-position-title {
   flex: 1;
   font-size: 18px;
   font-weight: 600;
   line-height: 1.35;
 }
 
-:is(#ltBlock2262937572) .form-position-price {
+:is(#ltBlock2262937572, #ltBlock2262941216) .form-position-price {
   margin-left: auto;
   white-space: nowrap;
   font-size: 20px;
@@ -1340,26 +1340,26 @@
 }
 
 /* Цена со скидкой (формы тарифов): старая зачёркнута над итоговой */
-:is(#ltBlock2262937572) .form-position-price {
+:is(#ltBlock2262937572, #ltBlock2262941216) .form-position-price {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   line-height: 1.15;
 }
 
-:is(#ltBlock2262937572) .form-position-price__discount {
+:is(#ltBlock2262937572, #ltBlock2262941216) .form-position-price__discount {
   font-size: 14px;
   font-weight: 500;
   color: #A9A1C8;
   text-decoration: line-through;
 }
 
-:is(#ltBlock2262937572) .form-position-input {
+:is(#ltBlock2262937572, #ltBlock2262941216) .form-position-input {
   accent-color: #9B6BE4;
 }
 
 /* Цена за токен и метка «выгоднее всего» — их дописывает page.js */
-:is(#ltBlock2262937572) .tsss-offer-rate {
+:is(#ltBlock2262937572, #ltBlock2262941216) .tsss-offer-rate {
   display: block;
   margin-top: 2px;
   font-size: 14px;
@@ -1367,7 +1367,7 @@
   color: #A9A1C8;
 }
 
-:is(#ltBlock2262937572) .tsss-offer-badge {
+:is(#ltBlock2262937572, #ltBlock2262941216) .tsss-offer-badge {
   display: inline-block;
   margin-left: 8px;
   padding: 3px 10px;
@@ -1385,22 +1385,22 @@
 /* Форма заказа внутри экрана пакетов: карточку рисует .tsss-packs__panel,
    у блока ГетКурса убираем свой фон, рамку, отступы и бутстраповскую сетку
    (.container шириной 1170px, колонка col-md-8 со сдвигом) */
-.tsss-packs__form :is(#ltBlock2262937572) {
+.tsss-packs__form :is(#ltBlock2262937572, #ltBlock2262941216) {
   padding: 0 !important;
   background: transparent !important;
 }
 
-.tsss-packs__form :is(#ltBlock2262937572) .container {
+.tsss-packs__form :is(#ltBlock2262937572, #ltBlock2262941216) .container {
   width: auto;
   max-width: none;
   padding: 0;
 }
 
-.tsss-packs__form :is(#ltBlock2262937572) .row {
+.tsss-packs__form :is(#ltBlock2262937572, #ltBlock2262941216) .row {
   margin: 0;
 }
 
-.tsss-packs__form :is(#ltBlock2262937572) .block-box {
+.tsss-packs__form :is(#ltBlock2262937572, #ltBlock2262941216) .block-box {
   padding: 0 !important;
   background: transparent !important;
   border: 0 !important;
@@ -1408,12 +1408,12 @@
   box-shadow: none;
 }
 
-.tsss-packs__form :is(#ltBlock2262937572) .form-content {
+.tsss-packs__form :is(#ltBlock2262937572, #ltBlock2262941216) .form-content {
   padding: 15px 0 !important;
 }
 
 /* Поля — «таблетки» */
-:is(#ltBlock2262937572) .f-input {
+:is(#ltBlock2262937572, #ltBlock2262941216) .f-input {
   box-sizing: border-box;
   width: 100%;
   height: auto;
@@ -1429,29 +1429,29 @@
   transition: border-color 0.25s ease;
 }
 
-:is(#ltBlock2262937572) .f-input::placeholder {
+:is(#ltBlock2262937572, #ltBlock2262941216) .f-input::placeholder {
   color: #A9A1C8;
 }
 
-:is(#ltBlock2262937572) .f-input:focus {
+:is(#ltBlock2262937572, #ltBlock2262941216) .f-input:focus {
   outline: none;
   border-color: #7FE8FF;
 }
 
-:is(#ltBlock2262937572) .iti {
+:is(#ltBlock2262937572, #ltBlock2262941216) .iti {
   width: 100%;
 }
 
-:is(#ltBlock2262937572) .iti__selected-country {
+:is(#ltBlock2262937572, #ltBlock2262941216) .iti__selected-country {
   padding-left: 20px;
 }
 
-:is(#ltBlock2262937572) .f-input.iti__tel-input {
+:is(#ltBlock2262937572, #ltBlock2262941216) .f-input.iti__tel-input {
   padding-left: 64px !important;
 }
 
 /* Кнопка — градиент и свечение, как на token_purchase */
-:is(#ltBlock2262937572) .f-btn {
+:is(#ltBlock2262937572, #ltBlock2262941216) .f-btn {
   display: block;
   width: 100%;
   padding: 17px 0;
@@ -1468,12 +1468,12 @@
   transition: filter 0.25s ease, box-shadow 0.25s ease;
 }
 
-:is(#ltBlock2262937572) .f-btn:hover {
+:is(#ltBlock2262937572, #ltBlock2262941216) .f-btn:hover {
   filter: brightness(1.08);
 }
 
 /* Согласия */
-:is(#ltBlock2262937572) .global-confirm-checkbox-block {
+:is(#ltBlock2262937572, #ltBlock2262941216) .global-confirm-checkbox-block {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -1481,7 +1481,7 @@
   padding: 0 !important;
 }
 
-:is(#ltBlock2262937572) .global-confirm-checkbox-block label {
+:is(#ltBlock2262937572, #ltBlock2262941216) .global-confirm-checkbox-block label {
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -1491,7 +1491,7 @@
   cursor: pointer;
 }
 
-:is(#ltBlock2262937572) .global-confirm-checkbox {
+:is(#ltBlock2262937572, #ltBlock2262941216) .global-confirm-checkbox {
   flex: none;
   width: 16px;
   height: 16px;
@@ -1499,14 +1499,14 @@
   accent-color: #9B6BE4;
 }
 
-:is(#ltBlock2262937572) .checkbox-text {
+:is(#ltBlock2262937572, #ltBlock2262941216) .checkbox-text {
   color: #A9A1C8;
   font-family: var(--tsss-font-body);
   font-size: 13px;
   line-height: 1.5;
 }
 
-:is(#ltBlock2262937572) .checkbox-text a {
+:is(#ltBlock2262937572, #ltBlock2262941216) .checkbox-text a {
   color: #DCD7EE;
   text-decoration: underline;
 }
@@ -1514,16 +1514,16 @@
 @media (max-width: 480px) {
   /* На телефоне ГетКурс растягивает окно на всю ширину своим !important —
      перебиваем селектором точнее и оставляем поля по краям */
-  .modal.gc-modal .modal-dialog:has(#ltBlock2262937572) {
+  .modal.gc-modal .modal-dialog:has(#ltBlock2262937572, #ltBlock2262941216) {
     width: calc(100vw - 32px) !important;
     margin: 16px auto !important;
   }
 
-  :is(#ltBlock2262937572) .block-box {
+  :is(#ltBlock2262937572, #ltBlock2262941216) .block-box {
     padding: 22px 18px !important;
   }
 
-  :is(#ltBlock2262937572) .form-position {
+  :is(#ltBlock2262937572, #ltBlock2262941216) .form-position {
     display: grid;
     grid-template-columns: 18px minmax(0, 1fr);
     gap: 6px 12px;
@@ -1531,18 +1531,18 @@
     font-size: 14px;
   }
 
-  :is(#ltBlock2262937572) .form-position-checker {
+  :is(#ltBlock2262937572, #ltBlock2262941216) .form-position-checker {
     grid-row: 1 / span 2;
     align-self: center;
   }
 
-  :is(#ltBlock2262937572) .form-position-title {
+  :is(#ltBlock2262937572, #ltBlock2262941216) .form-position-title {
     grid-column: 2;
     min-width: 0;
     font-size: 16px;
   }
 
-  :is(#ltBlock2262937572) .form-position-price {
+  :is(#ltBlock2262937572, #ltBlock2262941216) .form-position-price {
     grid-column: 2;
     margin-left: 0;
     font-size: 18px;
@@ -1553,12 +1553,12 @@
 
   /* Пакеты токенов короткие — цена остаётся справа, в одну строку
      с названием, иначе пять пакетов вытягивают форму на два экрана */
-  .tsss-packs__form :is(#ltBlock2262937572) .form-position {
+  .tsss-packs__form :is(#ltBlock2262937572, #ltBlock2262941216) .form-position {
     display: flex;
     gap: 12px;
   }
 
-  .tsss-packs__form :is(#ltBlock2262937572) .form-position-price {
+  .tsss-packs__form :is(#ltBlock2262937572, #ltBlock2262941216) .form-position-price {
     margin-left: auto;
   }
 }
