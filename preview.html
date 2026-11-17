@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Нейробот ТЕССА AI — превью</title>
+<style>html { font-size: 10px; } body { margin: 0; }</style>
+<link rel="stylesheet" href="page.css?v=1794904071">
+</head>
+<body>
+<!--
+  Страница продажи нейробота «ТЕССА AI» (пакеты токенов).
+  Текст — по Google Doc 17YE_QEClYYxYqXPgtH-I6ZBmIBUkoX9PtRcCa4hP0PA («ТЗ на сайт продажи БОТ-ИИ»).
+  Оформление — как на ../sale, ../ai-songs и ../ai-sound, тот же набор компонентов.
+
+  Вставляется в блок «HTML» страницы ГетКурса целиком.
+  Все классы — tsss-блок__элемент--модификатор, всё внутри .tsss-page.
+
+  Пути img/... и video/... и коды форм b-T100 / b-T200 / b-T500 / b-T700 / b-T1000 / b-ASK —
+  заготовки. Их подставляет build.py из img-urls.txt и gc-ids.txt (см. README.md).
+-->
+<div class="tsss-page tsss-page--ai-bot">
+
+  <!-- ==================== ЭКРАН 1. ПЕРВЫЙ ЭКРАН ==================== -->
+  <section class="tsss-hero" id="tsss-hero">
+    <div class="tsss-hero__stage">
+      <img class="tsss-hero__bg" src="img/hero-bg.webp" alt="" width="1774" height="887" fetchpriority="high">
+
+      <div class="tsss-container tsss-hero__inner">
+        <a class="tsss-logo tsss-hero__logo" href="/" aria-label="TSSS AI — на главную">
+          <img class="tsss-logo__img" src="img/logo.webp" alt="" width="45" height="45">
+          <span class="tsss-logo__text">Дистанционное обучение<br>удалённым профессиям</span>
+        </a>
+
+        <h1 class="tsss-hero__title tsss-hero__title--bot">
+          <span class="tsss-hero__title-pre">Нейробот</span>
+          <span class="tsss-hero__title-main">ТЕССА AI</span>
+        </h1>
+
+        <p class="tsss-hero__text">Создавайте изображения, готовьте тексты и&nbsp;генерируйте видео для своих идей, контента и&nbsp;проектов.</p>
+        <p class="tsss-hero__note">Выберите задачу, опишите нужный результат и&nbsp;отправьте запрос нейросети.</p>
+
+        <div class="tsss-hero__offer">
+          <p class="tsss-pill tsss-pill--accent tsss-hero__price">От&nbsp;300&nbsp;₽ за&nbsp;пакет токенов</p>
+          <p class="tsss-hero__access">Доступ сразу после оплаты</p>
+        </div>
+
+        <div class="tsss-hero__actions">
+          <a class="tsss-btn tsss-btn--glow" href="#tsss-packs">Выбрать пакет и&nbsp;начать&nbsp;↓</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ЭКРАН 2. ЧТО МОЖНО СОЗДАТЬ ==================== -->
+  <section class="tsss-section tsss-section--light tsss-create" id="tsss-create">
+    <div class="tsss-container">
+      <h2 class="tsss-section__title">Что хотите создать <span class="tsss-grad-text">вы?</span></h2>
+
+      <ul class="tsss-create__list">
+        <li class="tsss-card tsss-create__item">
+          <div class="tsss-create__cover">
+            <img class="tsss-create__img" src="img/create-image.webp" alt="" width="900" height="450" loading="lazy">
+          </div>
+          <h3 class="tsss-create__title">Изображения под вашу задумку</h3>
+          <p class="tsss-card__text">От&nbsp;иллюстрации для личного проекта до&nbsp;визуала для публикации. Опишите сюжет, настроение и&nbsp;стиль.</p>
+          <div class="tsss-create__models">
+            <p class="tsss-create__label">В&nbsp;боте есть:</p>
+            <ul class="tsss-chips">
+              <li class="tsss-chips__item">Nano Banana</li>
+              <li class="tsss-chips__item">GPT Image</li>
+              <li class="tsss-chips__item">Seedream</li>
+              <li class="tsss-chips__item">Recraft</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tsss-card tsss-create__item">
+          <div class="tsss-create__cover">
+            <img class="tsss-create__img" src="img/create-video.webp" alt="" width="900" height="450" loading="lazy">
+          </div>
+          <h3 class="tsss-create__title">Видео, которое хочется показать</h3>
+          <p class="tsss-card__text">Создавайте видеосцены для соцсетей, презентации своей идеи или творческого проекта.</p>
+          <div class="tsss-create__models">
+            <p class="tsss-create__label">В&nbsp;боте есть:</p>
+            <ul class="tsss-chips">
+              <li class="tsss-chips__item">Kling</li>
+              <li class="tsss-chips__item">Veo</li>
+              <li class="tsss-chips__item">Wan</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tsss-card tsss-create__item">
+          <div class="tsss-create__cover">
+            <img class="tsss-create__img" src="img/create-text.webp" alt="" width="900" height="450" loading="lazy">
+          </div>
+          <h3 class="tsss-create__title">Тексты, с&nbsp;которых проще начать</h3>
+          <p class="tsss-card__text">Посты, письма, описания товаров и&nbsp;сценарии. Задайте тему, аудиторию и&nbsp;формат&nbsp;— получите вариант для дальнейшей проверки и&nbsp;правок.</p>
+          <div class="tsss-create__models">
+            <p class="tsss-create__label">В&nbsp;боте есть:</p>
+            <ul class="tsss-chips">
+              <li class="tsss-chips__item">Gemini</li>
+              <li class="tsss-chips__item">GPT</li>
+              <li class="tsss-chips__item">Claude</li>
+              <li class="tsss-chips__item">DeepSeek</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tsss-card tsss-create__item">
+          <div class="tsss-create__cover">
+            <img class="tsss-create__img" src="img/create-sound.webp" alt="" width="900" height="450" loading="lazy">
+          </div>
+          <h3 class="tsss-create__title">Звук, который задаёт настроение</h3>
+          <p class="tsss-card__text">Музыка, звуковые эффекты и&nbsp;озвучка. Опишите задачу, настроение и&nbsp;характер звучания&nbsp;— создайте аудио для своего проекта.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Экраны 3 и 4 — на общем ночном фоне, без стыка между ними -->
+  <div class="tsss-night tsss-night--bot">
+
+  <!-- ==================== ЭКРАН 3. БЕЗ СРОКА ДЕЙСТВИЯ ==================== -->
+  <section class="tsss-section tsss-section--dark tsss-forever">
+    <div class="tsss-container tsss-container--narrow">
+      <div class="tsss-forever__card">
+        <span class="tsss-forever__sign" aria-hidden="true">
+          <svg class="tsss-forever__svg" viewBox="0 0 24 24" fill="none">
+            <defs>
+              <linearGradient id="tsss-forever-grad" x1="2" y1="12" x2="22" y2="12" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#7FE8FF"/>
+                <stop offset="0.5" stop-color="#B88CFF"/>
+                <stop offset="1" stop-color="#F6C7E8"/>
+              </linearGradient>
+            </defs>
+            <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z" stroke="url(#tsss-forever-grad)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <div class="tsss-forever__body">
+          <h2 class="tsss-forever__title">Используйте токены, <span class="tsss-grad-text tsss-forever__accent">пока не&nbsp;кончатся!</span></h2>
+          <p class="tsss-pill tsss-pill--accent tsss-forever__pill">Нет сроков действия</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ЭКРАН 4. ДЛЯ ЧЕГО ==================== -->
+  <section class="tsss-section tsss-section--dark tsss-ideas" id="tsss-ideas">
+    <div class="tsss-container">
+      <h2 class="tsss-section__title">Идеи, которые <span class="tsss-grad-text">пора воплотить</span></h2>
+
+      <ul class="tsss-ideas__list">
+        <li class="tsss-card tsss-ideas__item">
+          <span class="tsss-ideas__icon"><img class="tsss-ideas__img" src="img/idea-self.webp" alt="" width="560" height="560" loading="lazy"></span>
+          <h3 class="tsss-card__title">Для себя</h3>
+          <p class="tsss-card__text">Создать необычное изображение, придумать историю или попробовать новый творческий формат.</p>
+        </li>
+        <li class="tsss-card tsss-ideas__item">
+          <span class="tsss-ideas__icon"><img class="tsss-ideas__img" src="img/idea-project.webp" alt="" width="640" height="427" loading="lazy"></span>
+          <h3 class="tsss-card__title">Для своего проекта</h3>
+          <p class="tsss-card__text">Подготовить тексты и&nbsp;визуалы, показать продукт, создать контент для публикаций.</p>
+        </li>
+        <li class="tsss-card tsss-ideas__item">
+          <span class="tsss-ideas__icon"><img class="tsss-ideas__img" src="img/idea-clients.webp" alt="" width="640" height="427" loading="lazy"></span>
+          <h3 class="tsss-card__title">Для клиентских задач</h3>
+          <p class="tsss-card__text">Разрабатывать варианты материалов по&nbsp;заданию, сравнивать идеи и&nbsp;дорабатывать выбранное направление.</p>
+        </li>
+      </ul>
+
+      <div class="tsss-section__actions">
+        <a class="tsss-btn tsss-btn--glow" href="#tsss-packs">Перейти к&nbsp;пакетам&nbsp;→</a>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <!-- ==================== ЭКРАН 5. ПРИМЕРЫ ==================== -->
+  <section class="tsss-section tsss-section--light tsss-examples" id="tsss-examples">
+    <div class="tsss-container">
+      <h2 class="tsss-section__title">Придумали. Попросили. <span class="tsss-grad-text">Создали.</span></h2>
+      <p class="tsss-section__lead">Примеры того, что может наш ТЕССА&nbsp;AI</p>
+
+      <div class="tsss-gallery" data-tsss-gallery>
+        <div class="tsss-gallery__head">
+          <h3 class="tsss-gallery__title">Фото</h3>
+          <div class="tsss-gallery__nav">
+            <button class="tsss-gallery__arrow tsss-gallery__arrow--prev" type="button" data-tsss-gallery-prev aria-label="Назад"></button>
+            <button class="tsss-gallery__arrow tsss-gallery__arrow--next" type="button" data-tsss-gallery-next aria-label="Дальше"></button>
+          </div>
+        </div>
+        <ul class="tsss-gallery__track" data-tsss-gallery-track>
+          <li class="tsss-gallery__item tsss-gallery__item--square">
+            <div class="tsss-gallery__media"><img class="tsss-gallery__img" src="img/example-01.webp" alt="Чёрная лошадь бежит по берегу моря" width="1000" height="1000" loading="lazy"></div>
+            <p class="tsss-gallery__note">*продукт сгенерирован нейросетью</p>
+          </li>
+          <li class="tsss-gallery__item tsss-gallery__item--wide">
+            <div class="tsss-gallery__media"><img class="tsss-gallery__img" src="img/example-02.webp" alt="Флакон духов в лепестках на бордовом фоне" width="1100" height="614" loading="lazy"></div>
+            <p class="tsss-gallery__note">*продукт сгенерирован нейросетью</p>
+          </li>
+          <li class="tsss-gallery__item tsss-gallery__item--square">
+            <div class="tsss-gallery__media"><img class="tsss-gallery__img" src="img/example-03.webp" alt="Карточка товара: шампунь с экстрактом гибискуса" width="1000" height="1000" loading="lazy"></div>
+            <p class="tsss-gallery__note">*продукт сгенерирован нейросетью</p>
+          </li>
+          <li class="tsss-gallery__item tsss-gallery__item--square">
+            <div class="tsss-gallery__media"><img class="tsss-gallery__img" src="img/example-04.webp" alt="Свеча «Грейпфрут и мята» с фруктами" width="1000" height="1000" loading="lazy"></div>
+            <p class="tsss-gallery__note">*продукт сгенерирован нейросетью</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tsss-gallery" data-tsss-gallery>
+        <div class="tsss-gallery__head">
+          <h3 class="tsss-gallery__title">Видео</h3>
+          <div class="tsss-gallery__nav">
+            <button class="tsss-gallery__arrow tsss-gallery__arrow--prev" type="button" data-tsss-gallery-prev aria-label="Назад"></button>
+            <button class="tsss-gallery__arrow tsss-gallery__arrow--next" type="button" data-tsss-gallery-next aria-label="Дальше"></button>
+          </div>
+        </div>
+        <ul class="tsss-gallery__track" data-tsss-gallery-track>
+          <li class="tsss-gallery__item tsss-gallery__item--wide">
+            <div class="tsss-gallery__media"><video class="tsss-gallery__video" src="video/example-01.mp4" poster="img/video-01.webp" width="1280" height="720" muted loop playsinline controls preload="none" data-tsss-autoplay></video></div>
+            <p class="tsss-gallery__note">*продукт сгенерирован нейросетью</p>
+          </li>
+          <li class="tsss-gallery__item tsss-gallery__item--wide">
+            <div class="tsss-gallery__media"><video class="tsss-gallery__video" src="video/example-02.mp4" poster="img/video-02.webp" width="1280" height="720" muted loop playsinline controls preload="none" data-tsss-autoplay></video></div>
+            <p class="tsss-gallery__note">*продукт сгенерирован нейросетью</p>
+          </li>
+          <li class="tsss-gallery__item tsss-gallery__item--tall">
+            <div class="tsss-gallery__media"><video class="tsss-gallery__video" src="video/example-03.mp4" poster="img/video-03.webp" width="720" height="1280" muted loop playsinline controls preload="none" data-tsss-autoplay></video></div>
+            <p class="tsss-gallery__note">*продукт сгенерирован нейросетью</p>
+          </li>
+          <li class="tsss-gallery__item tsss-gallery__item--wide">
+            <div class="tsss-gallery__media"><video class="tsss-gallery__video" src="video/example-04.mp4" poster="img/video-04.webp" width="1280" height="722" muted loop playsinline controls preload="none" data-tsss-autoplay></video></div>
+            <p class="tsss-gallery__note">*продукт сгенерирован нейросетью</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ЭКРАН 6. ПАКЕТЫ ТОКЕНОВ (блок с продажей) ==================== -->
+  <section class="tsss-section tsss-section--violet tsss-packs" id="tsss-packs">
+    <div class="tsss-container">
+      <h2 class="tsss-section__title">Пополните баланс&nbsp;— <span class="tsss-grad-text">и&nbsp;начните создавать</span></h2>
+      <p class="tsss-section__lead">Токены&nbsp;— единицы внутреннего баланса бота. Они расходуются на&nbsp;запросы к&nbsp;нейросетям. Количество зависит от&nbsp;инструмента и&nbsp;параметров генерации.</p>
+
+      <ul class="tsss-packs__list">
+        <li class="tsss-card tsss-pack">
+          <p class="tsss-pack__amount"><span class="tsss-pack__num">100</span> токенов</p>
+          <p class="tsss-pack__price">300&nbsp;₽</p>
+          <p class="tsss-pack__rate">3&nbsp;₽ за&nbsp;токен</p>
+          <a class="tsss-btn tsss-btn--glow tsss-btn--block" href="javascript:void(0);" onclick="ltShowModalBlock('b-T100')"><span>Купить <span class="tsss-pack__btn-count">100 токенов</span></span></a>
+        </li>
+        <li class="tsss-card tsss-pack">
+          <p class="tsss-pack__amount"><span class="tsss-pack__num">200</span> токенов</p>
+          <p class="tsss-pack__price">400&nbsp;₽</p>
+          <p class="tsss-pack__rate">2&nbsp;₽ за&nbsp;токен</p>
+          <a class="tsss-btn tsss-btn--glow tsss-btn--block" href="javascript:void(0);" onclick="ltShowModalBlock('b-T200')"><span>Купить <span class="tsss-pack__btn-count">200 токенов</span></span></a>
+        </li>
+        <li class="tsss-card tsss-pack">
+          <p class="tsss-pack__amount"><span class="tsss-pack__num">500</span> токенов</p>
+          <p class="tsss-pack__price">750&nbsp;₽</p>
+          <p class="tsss-pack__rate">1,5&nbsp;₽ за&nbsp;токен</p>
+          <a class="tsss-btn tsss-btn--glow tsss-btn--block" href="javascript:void(0);" onclick="ltShowModalBlock('b-T500')"><span>Купить <span class="tsss-pack__btn-count">500 токенов</span></span></a>
+        </li>
+        <li class="tsss-card tsss-pack">
+          <p class="tsss-pack__amount"><span class="tsss-pack__num">700</span> токенов</p>
+          <p class="tsss-pack__price">840&nbsp;₽</p>
+          <p class="tsss-pack__rate">1,2&nbsp;₽ за&nbsp;токен</p>
+          <a class="tsss-btn tsss-btn--glow tsss-btn--block" href="javascript:void(0);" onclick="ltShowModalBlock('b-T700')"><span>Купить <span class="tsss-pack__btn-count">700 токенов</span></span></a>
+        </li>
+        <li class="tsss-card tsss-pack">
+          <p class="tsss-pack__amount"><span class="tsss-pack__num">1&nbsp;000</span> токенов</p>
+          <p class="tsss-pack__price">1&nbsp;100&nbsp;₽</p>
+          <p class="tsss-pack__rate">1,1&nbsp;₽ за&nbsp;токен</p>
+          <a class="tsss-btn tsss-btn--glow tsss-btn--block" href="javascript:void(0);" onclick="ltShowModalBlock('b-T1000')"><span>Купить <span class="tsss-pack__btn-count">1&nbsp;000 токенов</span></span></a>
+        </li>
+      </ul>
+
+      <p class="tsss-section__note">Чем больше пакет, тем ниже стоимость одного токена. Доступ открывается сразу после оплаты.</p>
+    </div>
+  </section>
+
+  <!-- ==================== ЭКРАН 7. ФИНАЛ ==================== -->
+  <section class="tsss-section tsss-section--dark tsss-final">
+    <img class="tsss-final__bg" src="img/final-bg.webp" alt="" width="1536" height="1024" loading="lazy">
+
+    <div class="tsss-container tsss-final__inner">
+      <p class="tsss-eyebrow">Нейробот ТЕССА&nbsp;AI</p>
+      <h2 class="tsss-section__title tsss-final__title">Ваша следующая идея может стать <span class="tsss-grad-text">изображением, текстом или&nbsp;видео</span></h2>
+      <p class="tsss-section__lead tsss-final__lead">Выберите, что хотите создать первым. Купите пакет токенов и&nbsp;получите доступ к&nbsp;боту сразу после оплаты.</p>
+
+      <div class="tsss-final__actions">
+        <a class="tsss-btn tsss-btn--glow" href="#tsss-packs">Начать&nbsp;— от&nbsp;300&nbsp;₽</a>
+        <a class="tsss-btn tsss-btn--glass" href="javascript:void(0);" onclick="ltShowModalBlock('b-ASK')">Есть вопросы? Задайте поддержке</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="page.js?v=1794904071"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+# Код блоков ГетКурса хранится с LF — так проще сверять с редактором
+* text=auto eol=lf
+*.webp binary
+*.png binary
+*.jpg binary
+*.mp4 binary

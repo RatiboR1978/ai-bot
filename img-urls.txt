@@ -1,0 +1,25 @@
+# Адреса файлов в файловом хранилище ГетКурса — по строке: имя адрес
+# logo и final-bg — те же файлы, что на sale / ai-sound / ai-songs.
+# Остальные загрузить и вписать адреса (картинки из img/, видео из video/).
+final-bg.webp https://fs.getcourse.ru/fileservice/file/download/a/949247/sc/55/h/9fb042c502393622cb463ff78338f0f6.webp
+logo.webp https://fs.getcourse.ru/fileservice/file/download/a/949247/sc/412/h/aebed40c6288bca42f05dd0ad663af1a.webp
+hero-bg.webp
+create-image.webp
+create-video.webp
+create-text.webp
+create-sound.webp
+idea-self.webp
+idea-project.webp
+idea-clients.webp
+example-01.webp
+example-02.webp
+example-03.webp
+example-04.webp
+video-01.webp
+video-02.webp
+video-03.webp
+video-04.webp
+example-01.mp4
+example-02.mp4
+example-03.mp4
+example-04.mp4
