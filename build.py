@@ -6,9 +6,12 @@
    (index.html — для GitHub Pages: без него там открывается README),
    с `html { font-size: 10px }`, как в глобальной теме ГетКурса,
    чтобы сразу ловить размеры, которые от неё зависят.
+   Вместо формы заказа ГетКурса — макет из form-mock.html: page.js
+   переносит его в экран пакетов так же, как настоящую форму.
 2. gc/page.html — то, что вставляется в блок «HTML» на ГетКурсе:
    пути img/*.webp и video/*.mp4 заменены на адреса из img-urls.txt,
-   коды форм b-T100, b-T200, … — на настоящие из gc-ids.txt.
+   код формы вопроса b-ASK и id блока формы заказа ltBlockTOKENS —
+   на настоящие из gc-ids.txt.
 3. gc/page.css — то, что вставляется в блок «CSS»: заготовка
    #ltBlockFORMS заменена на список id всех блоков форм.
 
@@ -18,7 +21,7 @@
 Формат img-urls.txt — по строке на файл (картинки и видео):
     hero-bg.webp https://fs.getcourse.ru/fileservice/file/download/a/.../h/...
 Формат gc-ids.txt — по строке на форму: роль, data-code блока, id блока:
-    T100 b-xxxxx ltBlock0000000000
+    TOKENS b-xxxxx ltBlock0000000000
 """
 
 import pathlib
@@ -26,8 +29,9 @@ import re
 import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
-# Роли форм на странице: пять пакетов токенов и вопрос в поддержку
-FORMS = ('T100', 'T200', 'T500', 'T700', 'T1000', 'ASK')
+# Роли форм на странице: заказ пакета токенов (одна форма с выбором)
+# и вопрос в поддержку
+FORMS = ('TOKENS', 'ASK')
 
 
 def read(name):
@@ -51,6 +55,10 @@ def read_pairs(name):
 
 
 def build_preview(html):
+    # Макет формы встаёт после страницы, как блок формы на ГетКурсе,
+    # и page.js переносит его в экран пакетов по id
+    html = html.replace('data-tsss-form="ltBlockTOKENS"', 'data-tsss-form="ltBlockFORMS"')
+    html += read('form-mock.html')
     # Метка версии в адресе — иначе браузер берёт page.css/page.js из кэша
     # и правки в превью не видны
     v = int(max((HERE / n).stat().st_mtime for n in ('page.css', 'page.js')))
@@ -89,6 +97,7 @@ def build_gc(html, css, urls, forms):
         if role in forms and len(forms[role]) == 2:
             code, block = forms[role]
             html = html.replace(f"'b-{role}'", f"'{code}'")
+            html = html.replace(f'ltBlock{role}', block)
             blocks.append(f'#{block}')
         else:
             missing.append(f'форма {role} (gc-ids.txt)')

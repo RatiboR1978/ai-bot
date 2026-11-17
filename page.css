@@ -1151,77 +1151,69 @@
     var(--tsss-violet);
 }
 
-/* Флекс, а не грид: неполный последний ряд на планшете встаёт по центру */
-.tsss-page .tsss-packs__list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+/* Слева — заголовок и что важно знать, справа — форма заказа */
+.tsss-page .tsss-packs__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+  align-items: center;
+  gap: 40px 72px;
 }
 
-.tsss-page .tsss-pack {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 0;
-  min-width: 0;
-  padding: 28px 20px 20px;
-  border-color: rgba(184, 140, 255, 0.32);
-  background: rgba(255, 255, 255, 0.06);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  text-align: center;
+.tsss-page .tsss-packs__intro .tsss-section__title,
+.tsss-page .tsss-packs__intro .tsss-section__lead {
+  text-align: left;
 }
 
-.tsss-page .tsss-pack__amount {
+.tsss-page .tsss-packs__intro .tsss-section__lead {
+  margin: 0 0 32px;
+}
+
+.tsss-page .tsss-packs__facts {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tsss-page .tsss-packs__fact {
   display: flex;
-  flex-direction: column;
-  font-size: 16px;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 18px;
   font-weight: 600;
-  line-height: 1.3;
-  color: var(--tsss-text-on-dark);
+  line-height: 1.45;
+  color: var(--tsss-tone-text);
 }
 
-.tsss-page .tsss-pack__num {
-  font-size: clamp(36px, 28px + 1vw, 46px);
+.tsss-page .tsss-packs__fact-icon {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  padding: 4px;
+  border-radius: 50%;
+  background: rgba(127, 232, 255, 0.14);
+  color: var(--tsss-ai-glow);
+}
+
+/* Карточка формы: градиентная рамка, как у карточки «пока не кончатся» */
+.tsss-page .tsss-packs__panel {
+  padding: 32px 32px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--tsss-radius-lg);
+  background:
+    linear-gradient(#1B1543, #1B1543) padding-box,
+    linear-gradient(135deg, rgba(127, 232, 255, 0.7), rgba(184, 140, 255, 0.35) 50%, rgba(246, 199, 232, 0.7)) border-box;
+  box-shadow: 0 24px 60px rgba(11, 4, 38, 0.45);
+}
+
+.tsss-page .tsss-packs__panel-title {
+  margin: 0 0 8px;
+  font-size: clamp(22px, 18px + 0.6vw, 28px);
   font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-align: center;
   color: var(--tsss-cloud-white);
-}
-
-.tsss-page .tsss-pack__price {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(184, 140, 255, 0.22);
-  font-size: clamp(28px, 22px + 0.8vw, 34px);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  background-image: var(--tsss-grad-text-dark);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.tsss-page .tsss-pack__rate {
-  margin: 6px 0 24px;
-  font-size: 15px;
-  color: var(--tsss-text-on-dark);
-}
-
-.tsss-page .tsss-pack .tsss-btn {
-  margin-top: auto;
-  min-height: 56px;
-  padding: 12px 10px;
-  font-size: 14px;
-  letter-spacing: 0.03em;
-}
-
-/* Пять в ряд — карточки узкие, и «Купить 1 000 токенов» не влезает в строку.
-   Чтобы все кнопки были одинаковые, количество всегда на второй строке;
-   где карточки шире (три и две в ряд, телефон) — в одну строку */
-.tsss-page .tsss-pack__btn-count {
-  display: block;
 }
 
 /* ---------- Экран 7: финал ---------- */
@@ -1237,8 +1229,8 @@
 }
 
 /* ============================================================
-   ФОРМЫ — родные блоки ГетКурса (form02, всплывающие): пять форм
-   заказа (по одной на пакет токенов) и вопрос в поддержку.
+   ФОРМЫ — родные блоки ГетКурса (form02): форма заказа с выбором
+   пакета (стоит в экране пакетов) и всплывающая форма вопроса.
    #ltBlockFORMS — заготовка: build.py заменяет её на список id всех
    блоков форм из gc-ids.txt.
    Оформлены как форма на tsss-ai.ru/token_purchase.
@@ -1321,7 +1313,8 @@
   cursor: pointer;
 }
 
-:is(#ltBlockFORMS) .form-position.selected {
+:is(#ltBlockFORMS) .form-position.selected,
+:is(#ltBlockFORMS) .form-position:has(.form-position-input:checked) {
   border-color: #9B6BE4 !important;
   background: rgba(155, 107, 228, 0.18) !important;
 }
@@ -1363,6 +1356,60 @@
 
 :is(#ltBlockFORMS) .form-position-input {
   accent-color: #9B6BE4;
+}
+
+/* Цена за токен и метка «выгоднее всего» — их дописывает page.js */
+:is(#ltBlockFORMS) .tsss-offer-rate {
+  display: block;
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #A9A1C8;
+}
+
+:is(#ltBlockFORMS) .tsss-offer-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #29C3F0 0%, #9B6BE4 100%);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: 2px;
+  color: #FFFFFF;
+}
+
+/* Форма заказа внутри экрана пакетов: карточку рисует .tsss-packs__panel,
+   у блока ГетКурса убираем свой фон, рамку, отступы и бутстраповскую сетку
+   (.container шириной 1170px, колонка col-md-8 со сдвигом) */
+.tsss-packs__form :is(#ltBlockFORMS) {
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+.tsss-packs__form :is(#ltBlockFORMS) .container {
+  width: auto;
+  max-width: none;
+  padding: 0;
+}
+
+.tsss-packs__form :is(#ltBlockFORMS) .row {
+  margin: 0;
+}
+
+.tsss-packs__form :is(#ltBlockFORMS) .block-box {
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none;
+}
+
+.tsss-packs__form :is(#ltBlockFORMS) .form-content {
+  padding: 15px 0 !important;
 }
 
 /* Поля — «таблетки» */
@@ -1435,8 +1482,21 @@
 }
 
 :is(#ltBlockFORMS) .global-confirm-checkbox-block label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
   margin: 0;
   padding: 0;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+:is(#ltBlockFORMS) .global-confirm-checkbox {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin: 2px 0 0;
+  accent-color: #9B6BE4;
 }
 
 :is(#ltBlockFORMS) .checkbox-text {
@@ -1490,6 +1550,17 @@
     align-items: baseline;
     gap: 10px;
   }
+
+  /* Пакеты токенов короткие — цена остаётся справа, в одну строку
+     с названием, иначе пять пакетов вытягивают форму на два экрана */
+  .tsss-packs__form :is(#ltBlockFORMS) .form-position {
+    display: flex;
+    gap: 12px;
+  }
+
+  .tsss-packs__form :is(#ltBlockFORMS) .form-position-price {
+    margin-left: auto;
+  }
 }
 
 /* ============================================================
@@ -1497,6 +1568,11 @@
    ============================================================ */
 
 @media (max-width: 1119px) {
+  .tsss-page .tsss-packs__layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
+    gap: 40px;
+  }
+
   /* Текст ложится на телефон с картинки — затемняем всю картинку */
   .tsss-page .tsss-hero__stage::after {
     background: linear-gradient(180deg, rgba(11, 4, 38, 0.55) 0%, rgba(11, 4, 38, 0.80) 45%, #0B0426 85%);
@@ -1505,15 +1581,6 @@
   .tsss-page .tsss-hero__inner {
     min-height: 0;
     padding-block: 32px 64px;
-  }
-
-  /* Пакеты: три в ряд, остаток по центру */
-  .tsss-page .tsss-pack {
-    flex: 0 1 calc((100% - 40px) / 3);
-  }
-
-  .tsss-page .tsss-pack__btn-count {
-    display: inline;
   }
 
   .tsss-page .tsss-ideas__list {
@@ -1531,6 +1598,29 @@
 }
 
 @media (max-width: 959px) {
+  /* Пакеты: текст над формой, по центру */
+  .tsss-page .tsss-packs__layout {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+
+  .tsss-page .tsss-packs__intro .tsss-section__title,
+  .tsss-page .tsss-packs__intro .tsss-section__lead {
+    text-align: center;
+  }
+
+  .tsss-page .tsss-packs__facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 28px;
+    max-width: 720px;
+    margin-inline: auto;
+  }
+
+  .tsss-page .tsss-packs__panel {
+    width: 100%;
+    max-width: 600px;
+  }
+
   .tsss-page .tsss-create__list {
     grid-template-columns: 1fr;
     max-width: 640px;
@@ -1555,17 +1645,6 @@
     grid-row: 1 / span 2;
     height: 110px;
     margin: 0;
-  }
-
-  .tsss-page .tsss-pack {
-    flex-basis: calc((100% - 20px) / 2);
-  }
-}
-
-/* Две в ряд на узком планшете — снова две строки */
-@media (min-width: 560px) and (max-width: 767px) {
-  .tsss-page .tsss-pack__btn-count {
-    display: block;
   }
 }
 
@@ -1634,6 +1713,18 @@
 }
 
 @media (max-width: 559px) {
+  .tsss-page .tsss-packs__facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tsss-page .tsss-packs__fact {
+    font-size: 16px;
+  }
+
+  .tsss-page .tsss-packs__panel {
+    padding: 24px 18px 4px;
+  }
+
   .tsss-page .tsss-create__item {
     padding: 12px 12px 24px;
   }
@@ -1652,38 +1743,5 @@
 
   .tsss-page .tsss-ideas__icon {
     height: 84px;
-  }
-
-  /* Пакет — строкой: количество и цена слева, кнопка на всю ширину снизу */
-  .tsss-page .tsss-pack {
-    flex-basis: 100%;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: end;
-    gap: 4px 16px;
-    padding: 20px;
-    text-align: left;
-  }
-
-  .tsss-page .tsss-pack__amount {
-    grid-row: 1 / span 2;
-    align-self: center;
-  }
-
-  .tsss-page .tsss-pack__price {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    text-align: right;
-  }
-
-  .tsss-page .tsss-pack__rate {
-    margin: 0;
-    text-align: right;
-  }
-
-  .tsss-page .tsss-pack .tsss-btn {
-    grid-column: 1 / -1;
-    margin-top: 16px;
   }
 }

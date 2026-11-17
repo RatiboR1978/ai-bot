@@ -6,7 +6,7 @@
   Вставляется в блок «HTML» страницы ГетКурса целиком.
   Все классы — tsss-блок__элемент--модификатор, всё внутри .tsss-page.
 
-  Пути img/... и video/... и коды форм b-T100 / b-T200 / b-T500 / b-T700 / b-T1000 / b-ASK —
+  Пути img/... и video/..., код формы вопроса b-ASK и id блока формы заказа ltBlock2262937572 —
   заготовки. Их подставляет build.py из img-urls.txt и gc-ids.txt (см. README.md).
 -->
 <div class="tsss-page tsss-page--ai-bot">
@@ -228,46 +228,27 @@
     </div>
   </section>
 
-  <!-- ==================== ЭКРАН 6. ПАКЕТЫ ТОКЕНОВ (блок с продажей) ==================== -->
+  <!-- ==================== ЭКРАН 6. ПАКЕТЫ ТОКЕНОВ (блок с продажей) ====================
+       Одна форма заказа ГетКурса с выбором пакета. Сам блок формы стоит на странице
+       отдельно — page.js переносит его в .tsss-packs__panel по id из data-tsss-form
+       (заготовка ltBlock2262937572, настоящий id подставляет build.py). -->
   <section class="tsss-section tsss-section--violet tsss-packs" id="tsss-packs">
-    <div class="tsss-container">
-      <h2 class="tsss-section__title">Пополните баланс&nbsp;— <span class="tsss-grad-text">и&nbsp;начните создавать</span></h2>
-      <p class="tsss-section__lead">Токены&nbsp;— единицы внутреннего баланса бота. Они расходуются на&nbsp;запросы к&nbsp;нейросетям. Количество зависит от&nbsp;инструмента и&nbsp;параметров генерации.</p>
+    <div class="tsss-container tsss-packs__layout">
+      <div class="tsss-packs__intro">
+        <h2 class="tsss-section__title">Пополните баланс&nbsp;— <span class="tsss-grad-text">и&nbsp;начните создавать</span></h2>
+        <p class="tsss-section__lead">Токены&nbsp;— единицы внутреннего баланса бота. Они расходуются на&nbsp;запросы к&nbsp;нейросетям. Количество зависит от&nbsp;инструмента и&nbsp;параметров генерации.</p>
+        <ul class="tsss-packs__facts">
+          <li class="tsss-packs__fact"><svg class="tsss-packs__fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Пакеты от&nbsp;100 до&nbsp;1&nbsp;000 токенов</span></li>
+          <li class="tsss-packs__fact"><svg class="tsss-packs__fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Чем больше пакет, тем дешевле токен: от&nbsp;3 до&nbsp;1,1&nbsp;₽</span></li>
+          <li class="tsss-packs__fact"><svg class="tsss-packs__fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Токены не&nbsp;сгорают&nbsp;— нет сроков действия</span></li>
+          <li class="tsss-packs__fact"><svg class="tsss-packs__fact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Доступ открывается сразу после оплаты</span></li>
+        </ul>
+      </div>
 
-      <ul class="tsss-packs__list">
-        <li class="tsss-card tsss-pack">
-          <p class="tsss-pack__amount"><span class="tsss-pack__num">100</span> токенов</p>
-          <p class="tsss-pack__price">300&nbsp;₽</p>
-          <p class="tsss-pack__rate">3&nbsp;₽ за&nbsp;токен</p>
-          <a class="tsss-btn tsss-btn--glow tsss-btn--block" href="javascript:void(0);" onclick="ltShowModalBlock('b-T100')"><span>Купить <span class="tsss-pack__btn-count">100 токенов</span></span></a>
-        </li>
-        <li class="tsss-card tsss-pack">
-          <p class="tsss-pack__amount"><span class="tsss-pack__num">200</span> токенов</p>
-          <p class="tsss-pack__price">400&nbsp;₽</p>
-          <p class="tsss-pack__rate">2&nbsp;₽ за&nbsp;токен</p>
-          <a class="tsss-btn tsss-btn--glow tsss-btn--block" href="javascript:void(0);" onclick="ltShowModalBlock('b-T200')"><span>Купить <span class="tsss-pack__btn-count">200 токенов</span></span></a>
-        </li>
-        <li class="tsss-card tsss-pack">
-          <p class="tsss-pack__amount"><span class="tsss-pack__num">500</span> токенов</p>
-          <p class="tsss-pack__price">750&nbsp;₽</p>
-          <p class="tsss-pack__rate">1,5&nbsp;₽ за&nbsp;токен</p>
-          <a class="tsss-btn tsss-btn--glow tsss-btn--block" href="javascript:void(0);" onclick="ltShowModalBlock('b-T500')"><span>Купить <span class="tsss-pack__btn-count">500 токенов</span></span></a>
-        </li>
-        <li class="tsss-card tsss-pack">
-          <p class="tsss-pack__amount"><span class="tsss-pack__num">700</span> токенов</p>
-          <p class="tsss-pack__price">840&nbsp;₽</p>
-          <p class="tsss-pack__rate">1,2&nbsp;₽ за&nbsp;токен</p>
-          <a class="tsss-btn tsss-btn--glow tsss-btn--block" href="javascript:void(0);" onclick="ltShowModalBlock('b-T700')"><span>Купить <span class="tsss-pack__btn-count">700 токенов</span></span></a>
-        </li>
-        <li class="tsss-card tsss-pack">
-          <p class="tsss-pack__amount"><span class="tsss-pack__num">1&nbsp;000</span> токенов</p>
-          <p class="tsss-pack__price">1&nbsp;100&nbsp;₽</p>
-          <p class="tsss-pack__rate">1,1&nbsp;₽ за&nbsp;токен</p>
-          <a class="tsss-btn tsss-btn--glow tsss-btn--block" href="javascript:void(0);" onclick="ltShowModalBlock('b-T1000')"><span>Купить <span class="tsss-pack__btn-count">1&nbsp;000 токенов</span></span></a>
-        </li>
-      </ul>
-
-      <p class="tsss-section__note">Чем больше пакет, тем ниже стоимость одного токена. Доступ открывается сразу после оплаты.</p>
+      <div class="tsss-packs__panel">
+        <p class="tsss-packs__panel-title">Выберите пакет</p>
+        <div class="tsss-packs__form" data-tsss-form="ltBlock2262937572"></div>
+      </div>
     </div>
   </section>
 

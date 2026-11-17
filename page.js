@@ -9,14 +9,70 @@
 (function () {
   'use strict';
 
-  /* Кнопки «Купить N токенов» открывают форму заказа сами, через onclick
-     в разметке (ltShowModalBlock — функция ГетКурса). Здесь их не трогаем. */
+  /* Кнопка «Задайте поддержке» открывает форму вопроса сама, через onclick
+     в разметке (ltShowModalBlock — функция ГетКурса). Здесь её не трогаем. */
 
   function ready(callback) {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', callback);
     } else {
       callback();
+    }
+  }
+
+  /* Пакеты в форме: название предложения ГетКурса («БОТ AI | Покупка
+     100 токенов») показываем коротко — «100 токенов», ниже цена за токен,
+     у самого дешёвого токена метка «выгоднее». Количество берётся
+     из названия, цена — из data-price-value. Не нашлось числа — строку
+     не трогаем: название остаётся как в предложении. */
+
+  function formatNumber(value) {
+    var parts = String(Math.round(value * 100) / 100).split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return parts.join(',');
+  }
+
+  function tokensWord(count) {
+    var n10 = count % 10;
+    var n100 = count % 100;
+    if (n10 === 1 && n100 !== 11) return 'токен';
+    if (n10 >= 2 && n10 <= 4 && (n100 < 12 || n100 > 14)) return 'токена';
+    return 'токенов';
+  }
+
+  function decorateOffers(block) {
+    var best = null;
+    var decorated = 0;
+    block.querySelectorAll('.form-position').forEach(function (position) {
+      if (position.hasAttribute('data-tsss-offer')) return;
+      var title = position.querySelector('.offer-title') || position.querySelector('.form-position-title');
+      var input = position.querySelector('.form-position-input');
+      if (!title || !input) return;
+
+      var match = title.textContent.match(/(\d[\d\s ]*)\s*токен/i);
+      var price = parseFloat(input.getAttribute('data-price-value'));
+      if (!match || !price) return;
+      var count = parseInt(match[1].replace(/\D/g, ''), 10);
+      if (!count) return;
+
+      position.setAttribute('data-tsss-offer', '');
+      position.title = title.textContent.trim();
+      title.textContent = formatNumber(count) + ' ' + tokensWord(count);
+
+      var rate = document.createElement('span');
+      rate.className = 'tsss-offer-rate';
+      rate.textContent = formatNumber(price / count) + ' ₽ за токен';
+      (position.querySelector('.form-position-title') || title).appendChild(rate);
+
+      decorated += 1;
+      if (!best || price / count < best.value) best = { value: price / count, rate: rate };
+    });
+
+    if (best && decorated > 1) {
+      var badge = document.createElement('span');
+      badge.className = 'tsss-offer-badge';
+      badge.textContent = 'выгоднее';
+      best.rate.parentNode.insertBefore(badge, best.rate);
     }
   }
 
@@ -36,6 +92,18 @@
         target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
       });
     });
+
+    /* ---------- Форма заказа — в экран пакетов ----------
+       Блок формы ГетКурса стоит на странице отдельным блоком (после HTML).
+       Переносим его в карточку .tsss-packs__form: id блока — в data-tsss-form.
+       Если блока нет (id сменился), форма просто останется на своём месте. */
+
+    var mount = page.querySelector('[data-tsss-form]');
+    var formBlock = mount && document.getElementById(mount.getAttribute('data-tsss-form'));
+    if (formBlock) {
+      if (!mount.contains(formBlock)) mount.appendChild(formBlock);
+      decorateOffers(formBlock);
+    }
 
     /* ---------- Ленты примеров: стрелки ----------
        Листается сама лента (overflow-x + scroll-snap), пальцем и колесом
