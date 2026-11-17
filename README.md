@@ -61,7 +61,8 @@
 | `page.js` | прокрутка к якорям, стрелки лент, автозапуск видео в кадре | блок «Javascript» |
 | `img/`, `img/original/`, `video/` | картинки WebP, их исходники, сжатые видео | файловое хранилище |
 | `img-urls.txt`, `gc-ids.txt` | адреса файлов, коды форм | — |
-| `build.py` | собирает `gc/` и `preview.html` | — |
+| `build.py` | собирает `gc/`, `preview.html` и `index.html` | — |
+| `index.html`, `.nojekyll` | превью для GitHub Pages: https://ratibor1978.github.io/ai-bot/ | — |
 | `src/tz.txt` | текст ТЗ на 17.11.2026 | — |
 
 ## Решения при вёрстке — проверить

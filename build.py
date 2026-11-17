@@ -2,7 +2,8 @@
 
     python build.py
 
-1. preview.html — локальный просмотр: page.html + page.css + page.js,
+1. preview.html и index.html — просмотр: page.html + page.css + page.js
+   (index.html — для GitHub Pages: без него там открывается README),
    с `html { font-size: 10px }`, как в глобальной теме ГетКурса,
    чтобы сразу ловить размеры, которые от неё зависят.
 2. gc/page.html — то, что вставляется в блок «HTML» на ГетКурсе:
@@ -68,7 +69,8 @@ def build_preview(html):
 </body>
 </html>
 """
-    (HERE / 'preview.html').write_text(doc, encoding='utf-8')
+    for name in ('preview.html', 'index.html'):
+        (HERE / name).write_text(doc, encoding='utf-8')
 
 
 def build_gc(html, css, urls, forms):
@@ -105,7 +107,7 @@ def main():
     html = read('page.html')
     build_preview(html)
     missing = build_gc(html, read('page.css'), read_pairs('img-urls.txt'), read_pairs('gc-ids.txt'))
-    print('preview.html — готово')
+    print('preview.html, index.html — готово')
     print('gc/page.html, gc/page.css — готово')
     if missing:
         print(f'Не хватает {len(missing)}:')
