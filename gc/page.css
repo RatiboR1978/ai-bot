@@ -1498,19 +1498,20 @@
   text-decoration: underline;
 }
 
-/* Форма заказа: согласие с офертой — доп. поле «БОТ AI | Оферта» (id 23349990),
-   оформлено как системные галки; системная «Оферта» скрыта (она отмечена,
-   форма отправляется). Галку в поле ставит page.js */
+/* Форма заказа: согласия — доп. поля-галки («БОТ AI | Оферта» 23349990,
+   «БОТ AI | Согласие на рассылку» 23350036), оформлены как системные галки;
+   системная «Оферта» скрыта (она отмечена, форма отправляется).
+   Галки в полях ставит page.js */
 #ltBlock2262937572 .global-confirm-checkbox-block:has(input[name="globalConfirmCheckbox"]) {
   display: none !important;
 }
 
-[data-id="23349990"] .custom-field-input {
+#ltBlock2262937572 [data-element="custom-field"][data-type="checkbox"] .custom-field-input {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-[data-id="23349990"] label.field-label {
+#ltBlock2262937572 [data-element="custom-field"][data-type="checkbox"] label.field-label {
   display: flex !important;
   align-items: flex-start;
   gap: 10px;
@@ -1524,7 +1525,7 @@
   cursor: pointer;
 }
 
-[data-id="23349990"] label.field-label input[type="checkbox"] {
+#ltBlock2262937572 [data-element="custom-field"][data-type="checkbox"] label.field-label input[type="checkbox"] {
   flex: none;
   width: 16px;
   height: 16px;
@@ -1533,14 +1534,14 @@
   cursor: pointer;
 }
 
-[data-id="23349990"] label.field-label a {
+#ltBlock2262937572 [data-element="custom-field"][data-type="checkbox"] label.field-label a {
   color: #DCD7EE !important;
   font-size: 13px !important;
   text-decoration: underline !important;
 }
 
-[data-id="23349990"] .field-input-block,
-[data-id="23349990"] .field-description-block {
+#ltBlock2262937572 [data-element="custom-field"][data-type="checkbox"] .field-input-block,
+#ltBlock2262937572 [data-element="custom-field"][data-type="checkbox"] .field-description-block {
   display: none !important;
 }
 

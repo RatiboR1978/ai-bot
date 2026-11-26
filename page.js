@@ -76,31 +76,39 @@
     }
   }
 
-  /* Согласие с офертой в форме заказа — доп. поле «БОТ AI | Оферта» (id 23349990).
-     Галка стоит сразу (change обновляет скрытое значение поля в 1); системная
-     «Оферта» скрыта в page.css, здесь — запасной вариант для браузеров без :has.
-     Ссылка «Оферты» в настройках поля записана как onclick=href="…" и никуда
-     не ведёт — делаем из неё обычную ссылку. */
+  /* Согласия в форме заказа — доп. поля-галки: «БОТ AI | Оферта» (23349990)
+     и «БОТ AI | Согласие на рассылку» (23350036). Галки стоят сразу (change
+     обновляет скрытое значение поля в 1); системная «Оферта» скрыта в page.css,
+     здесь — запасной вариант для браузеров без :has. Ссылки в настройках полей
+     записаны как onclick=href="…" и никуда не ведут — делаем из них обычные. */
+  var CONSENT_FIELDS = ['23349990', '23350036'];
+
   function setupOffer() {
-    var field = document.querySelector('[data-id="23349990"]');
-    if (!field) return;
+    var field = null;
 
-    var box = field.querySelector('input[type="checkbox"]');
-    if (box && !box.checked) {
-      box.checked = true;
-      box.dispatchEvent(new Event('change', { bubbles: true }));
-    }
+    CONSENT_FIELDS.forEach(function (id) {
+      var item = document.querySelector('[data-element="custom-field"][data-id="' + id + '"]');
+      if (!item) return;
+      field = field || item;
 
-    var link = field.querySelector('label a');
-    if (link && !link.getAttribute('href')) {
-      var url = (link.getAttribute('onclick') || '').match(/https?:\/\/[^"'\s]+/);
-      if (url) {
-        link.href = url[0];
-        link.target = '_blank';
-        link.removeAttribute('onclick');
+      var box = item.querySelector('input[type="checkbox"]');
+      if (box && !box.checked) {
+        box.checked = true;
+        box.dispatchEvent(new Event('change', { bubbles: true }));
       }
-    }
 
+      item.querySelectorAll('label a').forEach(function (link) {
+        if (link.getAttribute('href')) return;
+        var url = (link.getAttribute('onclick') || '').match(/https?:\/\/[^"'\s]+/);
+        if (url) {
+          link.href = url[0];
+          link.target = '_blank';
+          link.removeAttribute('onclick');
+        }
+      });
+    });
+
+    if (!field) return;
     var form = field.closest('form');
     var global = form && form.querySelector('input[name="globalConfirmCheckbox"]');
     if (global) {
