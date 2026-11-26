@@ -1498,6 +1498,52 @@
   text-decoration: underline;
 }
 
+/* Форма заказа: согласие с офертой — доп. поле «БОТ AI | Оферта» (id 23349990),
+   оформлено как системные галки; системная «Оферта» скрыта (она отмечена,
+   форма отправляется). Галку в поле ставит page.js */
+#ltBlock2262937572 .global-confirm-checkbox-block:has(input[name="globalConfirmCheckbox"]) {
+  display: none !important;
+}
+
+[data-id="23349990"] .custom-field-input {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+[data-id="23349990"] label.field-label {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 10px 0 0 !important;
+  padding: 0 !important;
+  color: #A9A1C8 !important;
+  font-family: var(--tsss-font-body) !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  cursor: pointer;
+}
+
+[data-id="23349990"] label.field-label input[type="checkbox"] {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin: 2px 0 0 !important;
+  accent-color: #9B6BE4;
+  cursor: pointer;
+}
+
+[data-id="23349990"] label.field-label a {
+  color: #DCD7EE !important;
+  font-size: 13px !important;
+  text-decoration: underline !important;
+}
+
+[data-id="23349990"] .field-input-block,
+[data-id="23349990"] .field-description-block {
+  display: none !important;
+}
+
 @media (max-width: 480px) {
   /* На телефоне ГетКурс растягивает окно на всю ширину своим !important —
      перебиваем селектором точнее и оставляем поля по краям */

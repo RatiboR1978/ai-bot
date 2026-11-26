@@ -76,7 +76,43 @@
     }
   }
 
+  /* Согласие с офертой в форме заказа — доп. поле «БОТ AI | Оферта» (id 23349990).
+     Галка стоит сразу (change обновляет скрытое значение поля в 1); системная
+     «Оферта» скрыта в page.css, здесь — запасной вариант для браузеров без :has.
+     Ссылка «Оферты» в настройках поля записана как onclick=href="…" и никуда
+     не ведёт — делаем из неё обычную ссылку. */
+  function setupOffer() {
+    var field = document.querySelector('[data-id="23349990"]');
+    if (!field) return;
+
+    var box = field.querySelector('input[type="checkbox"]');
+    if (box && !box.checked) {
+      box.checked = true;
+      box.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    var link = field.querySelector('label a');
+    if (link && !link.getAttribute('href')) {
+      var url = (link.getAttribute('onclick') || '').match(/https?:\/\/[^"'\s]+/);
+      if (url) {
+        link.href = url[0];
+        link.target = '_blank';
+        link.removeAttribute('onclick');
+      }
+    }
+
+    var form = field.closest('form');
+    var global = form && form.querySelector('input[name="globalConfirmCheckbox"]');
+    if (global) {
+      global.checked = true;
+      var block = global.closest('.global-confirm-checkbox-block');
+      if (block) block.style.display = 'none';
+    }
+  }
+
   ready(function () {
+    setupOffer();
+
     var page = document.querySelector('.tsss-page--ai-bot');
     if (!page) return;
 
